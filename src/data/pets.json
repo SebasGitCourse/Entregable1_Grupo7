@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "especie": "Perro",
+    "color": "Negro",
+    "edad": 3,
+    "sexo": "Macho",
+    "img": [
+      "/img/pets/1792900631802-deb8e01a-6d5d-47d7-bd97-e46e89e605a1.jpg",
+      "/img/pets/1792900631805-28deffcb-681d-4031-b017-7694c0e4f2bf.jpg",
+      "/img/pets/1792900631812-45a71df3-45e1-4f50-9d4f-032416a0e19e.jpg"
+    ]
+  },
+  {
+    "id": 2,
+    "especie": "Perro",
+    "color": "Amarillo claro",
+    "edad": 4,
+    "sexo": "Macho",
+    "img": [
+      "/img/pets/1792912451865-b42c1924-b514-476f-a1c6-2565bfe2fca8.jpg"
+    ]
+  },
+  {
+    "id": 3,
+    "especie": "Gato",
+    "color": "Blanco y naranja",
+    "edad": 1,
+    "sexo": "Macho",
+    "img": [
+      "/img/pets/1792912516959-b53052ec-e523-4643-9698-df327a852d5d.jpg",
+      "/img/pets/1792912516979-19dd7016-2ed1-4d4e-9681-4f207bfd0fdc.jpg"
+    ]
+  },
+  {
+    "id": 4,
+    "especie": "Loro",
+    "color": "Verde",
+    "edad": 1,
+    "sexo": "Macho",
+    "img": [
+      "/img/pets/1792912594865-162ace8d-931d-400f-98ac-a97f3e885026.jpg"
+    ]
+  }
+]

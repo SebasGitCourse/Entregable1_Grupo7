@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "firstName": "Sebastian",
+    "lastName": "Ramirez",
+    "username": "sebasrc",
+    "password": "4ab417dfd36e418c5cc45182f3eafb50:997b65302c1ca2fcc136cb122bb41b35d78e09c8fbdd99c8f50dedf47989f7267188d87be8de21f4bd76ec45adb7bf116607f6d1671c8a488d0b391b8f95f45d",
+    "avatar": "/img/users/1792899626374-98cfe6b0-70b2-49d9-9785-787a195934c9.jpg"
+  },
+  {
+    "id": 2,
+    "firstName": "Freylen",
+    "lastName": "Ceballes",
+    "username": "f.ceballes",
+    "password": "a16975e804caa2c1265a3a385dee01af:dacfe20a85baad57dfcde29e4adb71981a85a5404c3524300616248b02c6582c7ab44cab0be148fd72dcc155a3badaba02b5f7bec4f15b7cf5774a8ea66df45c",
+    "avatar": "/img/users/1792902805006-15009bd7-66fa-446f-99a6-a73b9b6c161a.jpg"
+  },
+  {
+    "id": 3,
+    "firstName": "Danna",
+    "lastName": "García",
+    "username": "danna.garcia",
+    "password": "c252a8cadbfbc7d1c291afe08dccde2c:b94c538ccb6a31722f04d5fb15f990154d68495967a8753043452151e60cfc09c652b744b21e708eaff87a91600205884fdac175590f72b24c34847932be33b5",
+    "avatar": "/img/users/1792903661490-147acae6-3796-41ba-8853-33f4f53c0db0.jpg"
+  },
+  {
+    "id": 4,
+    "firstName": "Diego",
+    "lastName": "Montoya",
+    "username": "ddiego89",
+    "password": "1de1145e50d1deab90ad828b602558e1:ccf92fea468eaa8c8a1f912fb9a7eda91aef7bc6b32ff21ca0db8e3ae9e5b7a50d24166ba547adee4162a4b3b631c14f2de44866a15ccade8affbef4aec1b0d1",
+    "avatar": "/img/users/1792911516318-e0f3f05e-7c32-41d9-b92a-f75e340bf080.jpg"
+  },
+  {
+    "id": 5,
+    "firstName": "Jorge Andres",
+    "lastName": "Perez",
+    "username": "p.andres2004",
+    "password": "d7674c43cd585188ed03bee33a5ca982:b823b2d8404e1ee1750bc13f4b829233d4b06bdbd2d2e6c22a36de66a8e729f704ba199904b5590b2a612b57d26322e89303c1ae7596541e219c0ec2d1025233",
+    "avatar": "/img/users/1792911605232-56e2269c-03c1-4852-a44f-c81305effcdf.jpg"
+  },
+  {
+    "id": 6,
+    "firstName": "Matias",
+    "lastName": "Ordoñez",
+    "username": "mati2005",
+    "password": "9ced86056240ddb6b6e68d8fbe700bc9:3ca9c0baa7c1b5f97f40e7f575fd2448de1fb6b91167143caf4449211f361b83d36dcf3b2f190e612078677933ab88e417130e85b944c7c4a9c3c8e52bec0903",
+    "avatar": "/img/users/1792911673453-0f78843d-a6f2-4e6b-8e0b-bb53ca52c17a.jpg"
+  },
+  {
+    "id": 7,
+    "firstName": "Laura",
+    "lastName": "Calderón",
+    "username": "lauc99",
+    "password": "25e3d944034559094232919a740029a5:82304c4c46001e1e8b1cfc57445aa6785e7639e3fb34066a1609ac02889bffddcb9e056c899acd530a12eae3f1287d81e191d51c249541d01ee986ff3744b5b6",
+    "avatar": "/img/users/1792911801154-75c3d550-dada-4fac-9039-f229ab8cf411.jpg"
+  },
+  {
+    "id": 8,
+    "firstName": "Camila",
+    "lastName": "Espinosa",
+    "username": "camila.espinosa222",
+    "password": "e6323ca7dea8d08ca7a9b395c1fa1304:383d4a4743e848b1d9dd80b9ba10d6a7656e757e790fb257a6bd7744ad0da23d251c155463ded58789c7173302fbc3b79afcda4f894333cdb015cff3ad01c154",
+    "avatar": "/img/users/1792911856709-527efa8d-3ff0-4b9b-be3f-da83fc3f7dce.jpg"
+  },
+  {
+    "id": 9,
+    "firstName": "Sara Sofía",
+    "lastName": "Cuellar Rojas",
+    "username": "scrojas7",
+    "password": "9e31d97408f58cf56962fa4a37158c00:4a3ad2bbb9d02a817a6480d414dc6f968ccaf4bb86d27f7e6dedb952b57206a5a39058c70743bea19142d5dcad91f697d281b6d338c585f90b608c6f725bfc53",
+    "avatar": "/img/users/1792911924185-a77e5458-d450-433a-81e8-6b40ebd87013.jpg"
+  },
+  {
+    "id": 10,
+    "firstName": "Karla",
+    "lastName": "Marin Ochoa",
+    "username": "marin_kar56",
+    "password": "6aa1c9fd847ab95150ff22a6ed4223f0:33eca2dfc5a5ef2d823eaa8a758cdec3f0cea71ec4726f5aa38cd0a87cd1f5bbd2ad201f3f0afe38b52a28f60b33e6822dc927574e95aac654b70831204fc054",
+    "avatar": "/img/users/1792912003297-5b450df6-9bac-40de-b005-d6c12904e279.jpg"
+  }
+]

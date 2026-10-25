@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios y Mascotas</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <header class="contenedor">
+        <div class="superior">
+            <span class="punto"></span>
+            Consulta de datos | API REST
+        </div>
+
+        <h1>Usuarios <span>&</span> mascotas</h1>
+
+    </header>
+
+    <main class="contenedor">
+        <nav class="pestanas" aria-label="Elegir recurso">
+            <button class="pestana activa" type="button" data-tipo="users" aria-pressed="true">Usuarios</button>
+
+            <button class="pestana" type="button" data-tipo="pets" aria-pressed="false">Mascotas</button>
+        </nav>
+
+        <section class="panel" aria-labelledby="titulo">
+            <span class="micro">EXPLORAR REGISTROS</span>
+            <h2 id="titulo">Usuarios</h2>
+            <p class="descripcion" id="subtitulo">
+                Consulta los usuarios registrados.
+            </p>
+
+            <form class="buscador" id="formulario">
+                <div class="campo">
+                    <label for="identificador">Buscar por ID</label>
+                    <input id="identificador" type="number" min="1" step="1" placeholder="Ej.: 1" required>
+                </div>
+
+                <div class="acciones">
+                    <button class="boton principal" type="submit">
+                        Buscar ID
+                    </button>
+
+                    <button class="boton secundario" type="button" id="mostrar-todos">
+                        Ver todos
+                    </button>
+                </div>
+            </form>
+
+            <p id="estado" class="estado" role="status">
+                Selecciona «Ver todos» o busca un registro por su ID.
+            </p>
+
+            <div id="resultados" class="rejilla"></div>
+        </section>
+    </main>
+
+    <footer>
+        Consulta de usuarios y mascotas | Datos obtenidos desde la API REST
+    </footer>
+
+    <script>
+        const titulo = document.querySelector('#titulo');
+        const subtitulo = document.querySelector('#subtitulo');
+        const entrada = document.querySelector('#identificador');
+        const estado = document.querySelector('#estado');
+        const resultados = document.querySelector('#resultados');
+
+        let tipoActivo = 'users';
+        let ultimaConsulta = 0;
+
+        function crear(etiqueta, clase = '', texto) {
+            const elemento = document.createElement(etiqueta);
+            if (clase) elemento.className = clase;
+            if (texto !== undefined) elemento.textContent = String(texto);
+            return elemento;
+        }
+
+        function agregarDato(lista, etiqueta, valor) {
+            const fila = crear('div', 'dato');
+            fila.append(
+                crear('dt', '', etiqueta),
+                crear('dd', '', valor ?? 'No registrado')
+            );
+            lista.appendChild(fila);
+        }
+
+        function crearFoto(ruta, descripcion) {
+            const imagen = crear('img');
+            imagen.src = ruta;
+            imagen.alt = descripcion;
+            imagen.loading = 'lazy';
+            return imagen;
+        }
+
+        function crearTarjeta(registro, tipo) {
+            const tarjeta = crear('article', 'tarjeta');
+            const contenido = crear('div', 'contenido');
+            const datos = crear('dl');
+
+            if (tipo === 'users') {
+                const avatar = crear('div', 'avatar');
+                const nombre = [
+                    registro.firstName,
+                    registro.lastName
+                ].filter(Boolean).join(' ') || 'Usuario';
+
+                if (typeof registro.avatar === 'string' &&
+                    registro.avatar.startsWith('/img/users/')) {
+                    avatar.appendChild(
+                        crearFoto(registro.avatar, `Avatar de ${nombre}`)
+                    );
+                } else {
+                    avatar.appendChild(
+                        crear('div', 'sin-imagen', 'Sin avatar')
+                    );
+                }
+
+                contenido.append(
+                    crear('span', 'identificador', `Usuario #${registro.id}`),
+                    crear('h3', '', nombre)
+                );
+
+                agregarDato(datos, 'Nombre', registro.firstName);
+                agregarDato(datos, 'Apellido', registro.lastName);
+                agregarDato(datos, 'Nombre de usuario', registro.username);
+
+                tarjeta.appendChild(avatar);
+            } else {
+                const galeria = crear('div', 'galeria');
+
+                const imagenes = Array.isArray(registro.img)
+                    ? registro.img.filter(ruta =>
+                        typeof ruta === 'string' &&
+                        ruta.startsWith('/img/pets/')
+                    )
+                    : [];
+
+                if (imagenes.length) {
+                    imagenes.forEach((ruta, indice) => {
+                        galeria.appendChild(
+                            crearFoto(
+                                ruta,
+                                `${registro.especie}, fotografía ${indice + 1}`
+                            )
+                        );
+                    });
+                } else {
+                    galeria.appendChild(
+                        crear('div', 'sin-imagen', 'Sin fotografías')
+                    );
+                }
+
+                contenido.append(
+                    crear('span', 'identificador', `Mascota #${registro.id}`),
+                    crear('h3', '', registro.especie ?? 'Mascota')
+                );
+
+                agregarDato(datos, 'Color', registro.color);
+                agregarDato(datos, 'Edad', `${registro.edad ?? '—'} años`);
+                agregarDato(datos, 'Sexo', registro.sexo);
+
+                tarjeta.appendChild(galeria);
+            }
+
+            contenido.appendChild(datos);
+            tarjeta.appendChild(contenido);
+
+            return tarjeta;
+        }
+
+        async function consultar(id = '') {
+            const tipo = tipoActivo;
+            const consulta = ++ultimaConsulta;
+
+            resultados.replaceChildren();
+            estado.hidden = false;
+            estado.textContent = 'Consultando registros...';
+
+            try {
+                const url = `/api/${tipo}${id ? `/${id}` : ''}`;
+                const respuesta = await fetch(url);
+
+                if (consulta !== ultimaConsulta) return;
+
+                if (respuesta.status === 404) {
+                    estado.textContent = 'No se encontró el registro solicitado.';
+                    return;
+                }
+
+                if (!respuesta.ok) {
+                    throw new Error(`Error HTTP ${respuesta.status}`);
+                }
+
+                const datos = await respuesta.json();
+
+                if (consulta !== ultimaConsulta) return;
+
+                const lista = Array.isArray(datos) ? datos : [datos];
+
+                if (lista.length === 0) {
+                    estado.textContent = tipo === 'users'
+                        ? 'No hay usuarios registrados.'
+                        : 'No hay mascotas registradas.';
+                    return;
+                }
+
+                estado.hidden = true;
+
+                lista.forEach(registro => {
+                    resultados.appendChild(crearTarjeta(registro, tipo));
+                });
+            } catch (error) {
+                if (consulta !== ultimaConsulta) return;
+
+                console.error(error);
+                estado.textContent =
+                    'No fue posible consultar. Comprobar que el servidor esté funcionando.';
+            }
+        }
+
+        document.querySelectorAll('[data-tipo]').forEach(boton => {
+            boton.addEventListener('click', () => {
+                tipoActivo = boton.dataset.tipo;
+                ultimaConsulta++;
+
+                document.querySelectorAll('[data-tipo]').forEach(tab => {
+                    const activa = tab === boton;
+                    tab.classList.toggle('activa', activa);
+                    tab.setAttribute('aria-pressed', String(activa));
+                });
+
+                const usuarios = tipoActivo === 'users';
+
+                titulo.textContent = usuarios ? 'Usuarios' : 'Mascotas';
+                subtitulo.textContent = usuarios
+                    ? 'Consulta los usuarios registrados.'
+                    : 'Consulta las mascotas registradas.';
+
+                entrada.value = '';
+                resultados.replaceChildren();
+                estado.hidden = false;
+                estado.textContent =
+                    'Selecciona «Ver todos» o busca un registro por su ID.';
+            });
+        });
+
+        document.querySelector('#formulario')
+            .addEventListener('submit', evento => {
+                evento.preventDefault();
+
+                const id = Number(entrada.value);
+
+                if (!Number.isSafeInteger(id) || id < 1) return;
+
+                consultar(String(id));
+            });
+
+        document.querySelector('#mostrar-todos')
+            .addEventListener('click', () => {
+                entrada.value = '';
+                consultar();
+            });
+    </script>
+</body>
+
+</html>
