@@ -42,7 +42,7 @@ async function guardarUsuarios(usuarios) {
 //GET - Consultar a todos los usuarios
 router.get("/", async (req, res) => {
     const usuarios = await obtenerUsuarios();
-    res.status(202).json(usuarios);
+    res.status(202).json(usuarios.map(u => ocultarContrasenia(u)));
 });
 
 //GET - Consultar usuario por "id"
